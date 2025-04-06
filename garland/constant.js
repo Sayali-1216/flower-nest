@@ -30,7 +30,3 @@ export const products = [
     { id: 29, name: "Floral Dupatta Garland", price: "₹4,150", image: "https://img.weddingbazaar.com/shaadisaga_production/photos/pictures/008/681/673/new_medium/ClipDown.App_452873835_514552357907981_4784781221804222391_n_%281%29.jpg?1725301774", category: "Floral Accessories" },
     { id: 30, name: "Ethnic Wedding Garland", price: "₹4,565", image: "https://images.squarespace-cdn.com/content/v1/5e6a1b18fd3b1d0590c83749/1630922527047-1REKOGDCUZ8POLF7ODCG/Capture.JPG", category: "Wedding Garlands" }
   ];
-
-
-
-  
