@@ -1,0 +1,74 @@
+/* Auth Container */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+}
+
+/* Auth Box */
+.auth-box {
+    background: white;
+    padding: 30px;
+    width: 350px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease-in-out;
+}
+
+/* Heading */
+.auth-box h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #ff7e5f;
+}
+
+/* Input Fields */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #ff7e5f;
+    outline: none;
+}
+
+/* Button */
+button {
+    width: 100%;
+    background: #ff7e5f;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #e05a41;
+}
+
+/* Toggle Text */
+p {
+    margin-top: 15px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+p:hover {
+    color: #ff7e5f;
+}

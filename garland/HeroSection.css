@@ -1,0 +1,71 @@
+/* Hero Section */
+.hero {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Hero Image Slider */
+  .hero-slider {
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .hero-slide {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  /* Hero Content */
+  .hero-content {
+    position: absolute;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 80%;
+  }
+  
+  .hero h2 {
+    font-size: 40px;
+    margin: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+  }
+  
+  .hero p {
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: 300;
+    color: orange;
+
+  }
+  
+  /* Button Styling */
+  .shop-btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    font-size: 18px;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .shop-btn:hover {
+    background: lightgray;
+    transform: scale(1.05);
+  }
