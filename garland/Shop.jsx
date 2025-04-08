@@ -32,11 +32,11 @@ const Shop = () => {
           </button>
         ))}
       </div>
-      {/* <div className="product-grid" style={}> */}
-      <div className="" style={{display:"flex",justifyContent:"space-around", flexWrap:'wrap', gap:"1rem",borderRadius:"0.5rem"}}>
+      <div className="product-grid" >
+      {/* <div className="" style={{}}> */}
         {filteredProducts.map((product) => (
-          // <div key={product.id} className="product-card">
-          <div key={product.id} className="" style={{width:"30%", height:'15rem'}}>
+          <div key={product.id} className="product-card">
+          {/* // <div key={product.id} className="" style={{width:"30%", height:'15rem'}}> */}
             <Link to={`/shop/${product.id}`}>
 
               <img src={product.image} alt={product.name} style={{width:'100%', height:"60%", objectFit:'cover'}} />

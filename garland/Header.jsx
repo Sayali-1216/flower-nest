@@ -1,5 +1,4 @@
 
-
 import React, { useContext, useState } from "react";
 import "./Header.css";
 import { FaShoppingCart, FaUser, FaBars, FaTimes } from "react-icons/fa";
@@ -8,8 +7,8 @@ import { ecomContext } from "./Home.jsx";
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
 
-   const {cart}=useContext(ecomContext);
-    
+    const { cart } = useContext(ecomContext);
+
     // Function to toggle menu on mobile
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -43,6 +42,11 @@ const Header = () => {
                     {menuOpen ? <FaTimes /> : <FaBars />}
                 </div>
             </div>
+            {/* <button onClick={() => {
+                localStorage.removeItem("currentUser");
+                alert("Logged out successfully");
+            }}>Logout</button> */}
+
         </header>
     );
 };

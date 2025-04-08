@@ -1,7 +1,12 @@
 import "./Style.css";
+// import { ecomContext } from "./Home.jsx";
+
 
 
 function BestSeller() {
+
+    //   const { products, handleAddToCart } = useContext(ecomContext);
+    
     return (
         <div className="bestProductContainer">
             <h1>B E S T S E L L E R </h1>
