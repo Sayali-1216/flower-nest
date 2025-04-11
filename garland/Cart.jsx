@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useContext, useState, useEffect } from 'react';
 import { ecomContext } from './Home';
 import "./Cart.css";
@@ -28,14 +24,29 @@ const Cart = () => {
   useEffect(() => {
     const newSubTotal = calculateSubTotal();
     setSubTotal(newSubTotal);
-    setShipping(cart.length > 0 ? 50 : 0); // Flat ₹50 shipping
-    setTax(Math.round(newSubTotal * 0.1)); // 10% tax
+    setShipping(cart.length > 0 ? 50 : 0);
+    setTax(Math.round(newSubTotal * 0.1));
   }, [cart]);
 
   const handleRemoveFromCart = (idToRemove) => {
     const updatedCart = cart.filter(item => item.id !== idToRemove);
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart)); // optional: persist update
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  const updateQuantity = (id, amount) => {
+    const updatedCart = cart.map(item => {
+      if (item.id === id) {
+        const newQuantity = (item.quantity || 1) + amount;
+        return {
+          ...item,
+          quantity: newQuantity < 1 ? 1 : newQuantity
+        };
+      }
+      return item;
+    });
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   return (
@@ -45,13 +56,18 @@ const Cart = () => {
         <div className="left">
           {cart.length > 0 ? cart.map((item, index) => (
             <div key={index} className="cart-item">
-              <img src={item.image} alt={item.name} width="100" />
+              <img src={item.image} alt={item.name}  />
               <div>
                 <h4>{item.name}</h4>
                 <p>Price: {item.price}</p>
-                <p>Quantity: {item.quantity || 1}</p>
-                <button onClick={() => handleRemoveFromCart(item.id)}>Remove</button>
+                <div className="quantity-control">
+                  <button onClick={() => updateQuantity(item.id, -1)}>-</button>
+                  <span>{item.quantity || 1}</span>
+                  <button onClick={() => updateQuantity(item.id, 1)}>+</button>
+                </div>
+               
               </div>
+               <button className="removebtn" onClick={() => handleRemoveFromCart(item.id)}>Remove</button>
             </div>
           )) : (
             <p className="empty-msg">Your cart is empty...</p>
@@ -70,4 +86,3 @@ const Cart = () => {
 };
 
 export default Cart;
-

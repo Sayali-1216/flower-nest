@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "framer-motion": "^12.6.2",
+    "framer-motion": "^12.6.3",
     "lucide-react": "^0.484.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -19,8 +19,8 @@
     "react-router-dom": "^7.3.0",
     "react-slick": "^0.30.3",
     "reactdom": "^2.0.0",
-    "slick-carousel": "^1.8.1"
- 
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.2.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

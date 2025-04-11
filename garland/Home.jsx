@@ -12,6 +12,10 @@ import Cart from "./Cart";
 import SingleProduct from "./SingleProduct";
 import { createContext, useEffect, useState } from "react";
 import { products } from "./constant";
+import Subscription from "./Subcription.jsx";
+import Signup from "./signup.jsx";
+import Login from "./login.jsx";
+import CustomOrder from "./CustomOrder.jsx";
 
 export const ecomContext = createContext();
 
@@ -77,7 +81,11 @@ function Home() {
           <Route path="/" element={<Main />} ></Route>
           <Route path="/about" element={<About />} ></Route>
           <Route path="/contact" element={<Contact />} ></Route>
-          <Route path="/auth" element={<Auth />} ></Route>
+          {/* <Route path="/auth" element={<Auth />} ></Route> */}
+          <Route path="/login" element={<Login />} ></Route>
+          <Route path="/signup" element={<Signup />} ></Route>
+          <Route path="/custom" element={<CustomOrder/>} ></Route>
+          <Route path="/subscriptions" element={<Subscription/>}></Route>
           <Route path="/shop" element={<Shopoutlet />} >
             <Route index element={<Shop />}></Route>
             <Route path=":id" element={<SingleProduct />}></Route>

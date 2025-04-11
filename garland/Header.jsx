@@ -25,7 +25,8 @@ const Header = () => {
                 <ul>
                     <li><a href="/" onClick={toggleMenu}>Home</a></li>
                     <li><a href="/shop" onClick={toggleMenu}>Shop</a></li>
-                    <li><a href="/category" onClick={toggleMenu}>Categories</a></li>
+                    <li><a href="/subscriptions" onClick={toggleMenu}>Subscriptions</a></li>
+                    <li><a href="/custom" onClick={toggleMenu}>Customize Order</a></li>
                     <li><a href="/about" onClick={toggleMenu}>About Us</a></li>
                     <li><a href="/contact" onClick={toggleMenu}>Contact</a></li>
                 </ul>
@@ -34,7 +35,7 @@ const Header = () => {
             {/* Header Icons */}
             <div className="header-icons">
                 <a href="/cart" className="icon"><FaShoppingCart /> <span>{cart.length}</span></a> {/* Cart Icon */}
-                <a href="/auth" className="icon"><FaUser /></a> {/* User Icon */}
+                <a href="/login" className="icon"><FaUser /></a> {/* User Icon */}
 
 
                 {/* Mobile Menu Button */}
