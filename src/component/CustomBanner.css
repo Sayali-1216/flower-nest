@@ -1,0 +1,61 @@
+.custom-order-banner {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-image: url('https://t4.ftcdn.net/jpg/12/41/96/75/360_F_1241967590_ek04LgqF46BebzUS07MriNtEACAQaYE3.jpg'); /* Update with your image path */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .custom-order-overlay {
+    background: rgba(0, 0, 0, 0.1); 
+    background-image: url();
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .custom-order-content {
+    text-align: center;
+    color: #fff;
+    max-width: 600px;
+    padding: 20px;
+  }
+  
+  .custom-order-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .custom-order-content p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    /* color: #f47c7c; */
+    /* color: #151111; */
+    color: #000;
+  }
+  
+  .custom-order-content button {
+    background-color:green;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    /* transition: 0.3s ease; */
+    transition: background 0.3s ease, transform 0.2s ease;
+
+  }
+  
+  .custom-order-content button:hover {
+    background-color:darkgreen;
+    transform: scale(1.05);
+
+  }
+  
