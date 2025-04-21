@@ -94,6 +94,7 @@ import React, { useState } from 'react';
 import './signup.css';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -142,10 +143,12 @@ const Register = () => {
 
      axios.post('http://garland.mohitsasane.tech/api/users/register',formData).then(response=>{
       console.log("post created :",response.data);
-      alert("Sign up successful..")
+      // alert("Sign up successful..");
+      toast.success("Signup successful!", { autoClose: 2000 });
      })
      .catch(error=>{
-      console.log("Error creating post :",error);
+      // console.log("Error creating post :",error);
+      toast.error("Error creating account!", { autoClose: 2000 });
      })
     
 

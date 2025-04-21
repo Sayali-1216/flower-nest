@@ -17,102 +17,153 @@ import CustomOrder from "../page/CustomOrder.jsx";
 import CheckOut from "../page/CheckOut.jsx";
 export const ecomContext = createContext();
 import axios from 'axios';
+import Order from "../page/Order.jsx";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { cartPostCall } from "../util/api.js";
 function Home() {
 
 
+  const [cart, setCart] = useState(() => {
+    const localData = localStorage.getItem("cart");
+    return localData ? JSON.parse(localData) : [];
+  });
 
 
+  // useEffect(() => {
+  //   const fetchCart = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       if (token) {
+  //         const response = await axios.post("http://garland.mohitsasane.tech/api/cart", {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`
+  //           }
+  //         });
+  //         setCart(response.data.cart || []);
+  //         console.log("product addedd");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching cart:", error);
+  //     }
+  //   };
 
-
-
-
-
-  const [cart, setCart] = useState([]);
+  //   fetchCart();
+  // }, []);
 
 
   useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (token) {
-          const response = await axios.get("http://garland.mohitsasane.tech/api/cart", {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          });
-          setCart(response.data.cart || []);
-        }
-      } catch (error) {
-        console.error("Error fetching cart:", error);
-      }
-    };
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
-    fetchCart();
-  }, []);
-
-
-  // const [cart, setCart] = useState(() => {
-  //   const localData = localStorage.getItem("cart");
-  //   return localData ? JSON.parse(localData) : [];
-  // });
 
   // useEffect(() => {
-  //   localStorage.setItem("cart", JSON.stringify(cart));
-  // }, [cart]);
+  //   const fetchCart = async () => {
+  //     const token = localStorage.getItem("token");
+  
+  //     if (!token) return;
+  
+  //     try {
+  //       const response = await axios.get("http://garland.mohitsasane.tech/api/cart", {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`
+  //         }
+  //       });
+  
+  //       setCart(response.data.cart || []);
+  //     } catch (error) {
+  //       console.error("Error fetching cart:", error);
+  //       toast.error("Failed to fetch cart.");
+  //     }
+  //   };
+  
+  //   fetchCart();
+  // }, []);
+  
+
+  
 
 
+
+
+  // function handleAddToCart(e, product) {
+
+
+  //   let quantity = product.quantity || 1;
+  
+
+
+  //   if (cart.length === 0) {
+  //     product.quantity = 1;
+  //     setCart([product]);
+  //     toast.success(`Product added in cart!`);
+  //     return;
+  //   }
+
+  //   const existingIndex = cart.findIndex((item) =>
+  //     item.product_id === product.product_id
+  //   )
+
+  //   if (existingIndex !== -1) {
+  //     const updaatedAArr = [...cart]
+
+  //     updaatedAArr[existingIndex].quantity += 1;
+  //     setCart(updaatedAArr);
+  //     toast.info(`Increased quantity of ${product.name || "product"} in cart`);
+  //   } else {
+  //     product.quantity = 1;
+  //     setCart([...cart, product]);
+  //     // toast.success(`${product.name || "Product"} added to cart!`);
+  //     toast.success(`Product added in cart!`);
+  //   }
+
+
+
+
+  //   // console.log(newCart,"newCart")
+
+
+  //   // e.preventDefault();
+  //   // let quantity = 1;
+  //   console.log("product ", product);
+
+
+
+  //   // setCart([...newCart]);
+  //   // console.log("new caart ", newCart);
+
+  //   // console.log("quantity ", quantity, product.product_id);
+  //   cartPostCall(product.product_id,quantity);
+  // }
 
 
   function handleAddToCart(e, product) {
-    if (cart === 0) {
-
-
-      setCart( [{...product}]);
+    let quantity = product.quantity || 1;
+  
+    const existingIndex = cart.findIndex((item) =>
+      item.product_id === product.product_id
+    );
+  
+    let updatedCart;
+  
+    if (existingIndex !== -1) {
+      updatedCart = [...cart];
+      updatedCart[existingIndex].quantity += 1;
+      toast.info(`Increased quantity of ${product.name || "product"} in cart`);
+    } else {
+      product.quantity = 1;
+      updatedCart = [...cart, product];
+      toast.success(`Product added in cart!`);
     }
-    // e.preventDefault();
-    let quantity = 1;
-    console.log("product ", product);
-
-    const newCart = cart.map((item) => {
-      if (item.id === product.product_id) {
-
-        item.quantity += 1;
-        quantity = item.quantity;
-        return item;
-      }
-      else {
-        return item;
-      }
-    })
-
-    setCart([...newCart]);
-    console.log("new caart ", newCart);
-
-    console.log("quantity ", quantity, product.product_id);
-    cartPostCall(product.id, quantity);
+  
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart)); // 💥 Add this line to persist cart
+  
+    // Send to backend
+    cartPostCall(product.product_id, quantity);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
 
 
 
@@ -138,6 +189,7 @@ function Home() {
           <Route path="/signup" element={<Signup />} ></Route>
           <Route path="/custom" element={<CustomOrder />} ></Route>
           <Route path="/subscriptions" element={<Subscription />}></Route>
+          <Route path="/order" element={<Order />}></Route>
           <Route path="/shop" element={<Shopoutlet />} >
             <Route index element={<Shop />}></Route>
             <Route path=":id" element={<SingleProduct />}></Route>
@@ -145,6 +197,18 @@ function Home() {
           <Route path="/cart" element={<Cart />} ></Route>
           <Route path="/checkout" element={<CheckOut />}></Route>
         </Routes>
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
       </ecomContext.Provider>
     </BrowserRouter>
   );

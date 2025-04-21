@@ -192,7 +192,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://garland.mohitsasane.tech/api/users/login', formData); // ✅ Update this URL to match your backend
+      const response = await axios.post('http://garland.mohitsasane.tech/api/users/login', formData); 
       const { token, user } = response.data;
 
       // Store token in localStorage

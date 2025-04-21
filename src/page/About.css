@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: black;
+    color: #555;
     text-align: center;
 }
 
@@ -45,6 +45,10 @@
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
+strong{
+    color: black;
+}
+
 /* Text */
 .about-text {
     font-size: 1.2rem;
@@ -78,7 +82,7 @@
 
 /* Button */
 .about-btn {
-    background: #ff9800;
+    background: green;
     color: white;
     padding: 12px 24px;
     font-size: 1.2rem;
@@ -90,7 +94,7 @@
 }
 
 .about-btn:hover {
-    background: #ff5722;
+    background: darkgreen;
     transform: scale(1.05);
 }
 

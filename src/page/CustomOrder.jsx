@@ -44,36 +44,37 @@ const CustomOrder = () => {
         </p>
 
         <form className="custom-order-form" onSubmit={handleSubmit}>
+          <label>Enter Title :</label>
           <input
             type="text"
             name="title"
-            placeholder="Enter title"
+            // placeholder="Enter title"
             value={formData.title}
             onChange={handleChange}
             required
           />
-
+          <label>Describe your custom garland (colors, flowers, size, etc.) :</label>
           <input
             type="text"
             name="description"
-            placeholder="Describe your custom garland (colors, flowers, size, etc.)"
+            // placeholder="Describe your custom garland (colors, flowers, size, etc.)"
             value={formData.description}
             onChange={handleChange}
             required
           />
-
+          <label>Reference image URL :</label>
           <input
             type="text"
             name="reference_image_url"
-            placeholder="Reference image URL"
+            // placeholder="Reference image URL"
             value={formData.reference_image_url}
             onChange={handleChange}
           />
-
+          <label>Any additional message :</label>
           <input
             type="text"
             name="message"
-            placeholder="Any additional message"
+            // placeholder="Any additional message"
             value={formData.message}
             onChange={handleChange}
           />

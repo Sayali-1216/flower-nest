@@ -12,6 +12,11 @@
     object-fit: cover;
 }
 
+.singleproduct-container img:hover{
+    transform: scale(1.05);
+    transition: transform 0.3s ease-out;
+}
+
 .singleProduct-info{
     text-align: left;
 }

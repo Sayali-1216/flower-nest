@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Subcription.css';
+import { toast } from 'react-toastify'; // ✅ Import toast
 
 const plans = ['Daily', 'Weekly', 'Monthly'];
 
@@ -46,6 +47,21 @@ const Subscription = () => {
     },
   ];
 
+  // ✅ Handle subscribe
+  const handleSubscribe = (plan) => {
+    if (selectedProducts.length === 0) {
+      toast.warning("Please select products to subscribe.");
+      return;
+    }
+
+    toast.success(`Subscribed to ${plan} plan successfully!`, {
+      position: "top-center",
+      autoClose: 3000,
+    });
+
+    // Optional: You could also send this data to a backend or reset UI
+  };
+
   const toggleProduct = (product) => {
     const isSelected = selectedProducts.find(p => p.id === product.id);
     const updated = isSelected
@@ -53,8 +69,7 @@ const Subscription = () => {
       : [...selectedProducts, product];
 
     setSelectedProducts(updated);
-    if (updated.length > 0) setShowStep2(true);
-    else setShowStep2(false);
+    setShowStep2(updated.length > 0);
   };
 
   return (
@@ -62,7 +77,6 @@ const Subscription = () => {
       <h1 className="main-heading">Fresh Blooms, Delivered Regularly</h1>
       <p className="quote">"Flowers are the music of the ground." 🌸</p>
 
-      {/* Discount Banner */}
       <div className="discount-banner">🎉 Get 20% OFF on Monthly Plans!</div>
 
       {/* Step 1 */}
@@ -95,7 +109,12 @@ const Subscription = () => {
                     {product.name}: ₹{product.price[plan]}
                   </p>
                 ))}
-                <button className="subscribe-btn" >Subscribe to {plan}</button>
+                <button
+                  className="subscribe-btn"
+                  onClick={() => handleSubscribe(plan)} // ✅ Corrected
+                >
+                  Subscribe to {plan}
+                </button>
               </div>
             ))}
           </div>

@@ -63,6 +63,12 @@
     margin-bottom: 15px;
 }
 
+.contact-form label{
+   
+        text-align: left;
+      
+}
+
 .contact-form input,
 .contact-form textarea {
     width: 100%;
@@ -80,7 +86,7 @@
 
 .contact-form button {
     width: 100%;
-    background: #ff4500;
+    background: green;
     color: white;
     padding: 12px;
     font-size: 1.2rem;
@@ -91,7 +97,7 @@
 }
 
 .contact-form button:hover {
-    background: #e03d00;
+    background:darkgreen;
     transform: scale(1.05);
 }
 

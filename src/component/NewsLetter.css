@@ -21,6 +21,7 @@
   .newsletter-content p {
     font-size: 1.2rem;
     margin-bottom: 20px;
+    color: #555;
   }
   
   .newsletter-form {
@@ -37,7 +38,7 @@
     border-radius: 5px;
     width: 450px;
     transition: 0.3s ease-in-out;
-    background-color: #e9c177;
+    background-color: #f1e093;
   }
   
   .newsletter-form input:focus {

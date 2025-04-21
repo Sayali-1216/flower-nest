@@ -11,7 +11,7 @@
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
+    max-width: 700px;
     text-align: center;
   }
   
@@ -33,10 +33,15 @@
     flex-direction: column;
     gap: 15px;
   }
+
+  .custom-order-form label{
+    text-align: left;
+  }
   
   .custom-order-form input,
   .custom-order-form textarea {
     width: 100%;
+    margin-left: 20px;
     padding: 12px;
     font-size: 1rem;
     border: 1px solid #ccc;
@@ -56,7 +61,7 @@
   }
   
   .custom-order-btn {
-    background: #ff5733;
+    background:green;
     color: white;
     padding: 12px;
     font-size: 1.2rem;
@@ -67,7 +72,7 @@
   }
   
   .custom-order-btn:hover {
-    background: #e04d2a;
+    background: darkgreen;
     transform: scale(1.05);
   }
   

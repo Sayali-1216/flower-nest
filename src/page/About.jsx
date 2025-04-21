@@ -16,10 +16,10 @@ const AboutUs = () => {
             <div className="about-bg"></div>
 
             <div className="about-content">
-                <h2 className="about-title">🌺 About Our Garland Store</h2>
+                <h2 className="about-title">About Our Garland Store</h2>
                 <p className="about-text">
-                    We specialize in **handcrafted floral garlands**, perfect for **weddings, ceremonies, and decorations**.  
-                    Our mission is to **deliver freshness and beauty** in every garland we create.
+                    We specialize in <strong >handcrafted floral garlands</strong>, perfect for <strong>weddings, ceremonies, and decorations</strong>.  
+                    Our mission is to  <strong>deliver freshness and beauty</strong> in every garland we create.
                 </p>
 
                 <div className="about-stats">

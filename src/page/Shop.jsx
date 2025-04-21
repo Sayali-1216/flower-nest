@@ -95,7 +95,7 @@ const Shop = () => {
     axios.get("http://garland.mohitsasane.tech/api/products")
       .then((res) => {
         setProducts(res.data);
-        console.log("Fetched Products:", res.data); // for debugging
+        console.log("Fetched Products:", res.data);
       })
       .catch((err) => {
         console.error("Error fetching products:", err);
