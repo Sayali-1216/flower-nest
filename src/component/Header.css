@@ -33,7 +33,22 @@
    transition: all 0.3s ease-in-out;
  }
 
- /* Logo Styling */
+.admin-header button{
+  padding: 0.2rem 1rem;
+  background-color: black;
+  border-radius: 0.4rem;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: #ffdd57;
+}
+
+.admin-header button:hover{
+  color: #000;
+  background-color: #ffdd57;
+  transform: scale(1.1);
+  /* padding: 1rem 1.3rem; */
+
+}
  .logo h1 {
    font-size: 28px;
    font-weight: bold;

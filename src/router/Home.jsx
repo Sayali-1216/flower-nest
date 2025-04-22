@@ -22,14 +22,13 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { cartPostCall } from "../util/api.js";
-
-
-import AdminLogin from "../admin-login.jsx";
-import AdminDashboard from "../admin/Dashboard.jsx";
-import AdminProducts from "../admin/Products.jsx";
-import AdminOrders from "../admin/AdminOrders.jsx";
+import AdminProducts from "../admin/Admin.jsx";
 import AddProduct from "../admin/AddProduct.jsx";
-import AdminPrivateRoute from "../AdminPrivateRoute.jsx";
+import DeleteProduct from "../admin/DeleteProduct.jsx";
+import UpdateProduct from "../admin/UpdateProduct.jsx";
+
+
+
 function Home() {
 
 
@@ -114,25 +113,17 @@ function Home() {
           <Route path="/cart" element={<Cart />} ></Route>
           <Route path="/checkout" element={<CheckOut />}></Route>
 
+          <Route path="/admin" element={<AdminProducts/>}></Route>
+          <Route path="/admin/add-product" element={<AddProduct/>}></Route>
+          <Route path="/admin/delete-product" element={<DeleteProduct/>}></Route>
+          <Route path="/admin/update-product" element={<UpdateProduct/>}></Route>
 
 
 
 
 
 
-//admin
-          <Route path="/admin-login" element={<AdminLogin />} />
-          {/* <Route path="/admin/dashboard" element={<AdminPrivateRoute><AdminDashboard /></AdminPrivateRoute>} /> */}
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
 
-          {/* <Route path="/admin/products" element={<AdminPrivateRoute><AdminProducts /></AdminPrivateRoute>} /> */}
-          <Route path="/admin/products" element={<AdminProducts />} />
-
-          {/* <Route path="/admin/add-product" element={<AdminPrivateRoute><AddProduct /></AdminPrivateRoute>} /> */}
-          <Route path="/admin/add-product" element={<AdminDashboard />} />
-
-          {/* <Route path="/admin/orders" element={<AdminPrivateRoute><AdminOrders /></AdminPrivateRoute>} /> */}
-          <Route path="/admin/orders" element={<AdminOrders />} />
 
 
 

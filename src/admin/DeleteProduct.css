@@ -1,0 +1,52 @@
+.delete-form-container {
+    max-width: 500px;
+    margin: 30px auto;
+    background-color: #fff7e6;
+    /* border: 2px solid #ff80ab; */
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(255, 128, 171, 0.2);
+  }
+  
+  .delete-form h2 {
+    text-align: center;
+    color: #e67e22;
+    margin-bottom: 25px;
+    /* font-family: 'Comic Sans MS', cursive; */
+  }
+  
+  .delete-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .delete-form label {
+    color: #e67e22;
+    font-weight: bold;
+  }
+  
+  .delete-form input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    /* background-color: #fff6fa; */
+  }
+  
+  .delete-form button {
+    background-color: #e67e22;   
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .delete-form button:hover {
+    background-color: #cf711f;
+  }
+  
