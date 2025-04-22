@@ -22,6 +22,14 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { cartPostCall } from "../util/api.js";
+
+
+import AdminLogin from "../admin-login.jsx";
+import AdminDashboard from "../admin/Dashboard.jsx";
+import AdminProducts from "../admin/Products.jsx";
+import AdminOrders from "../admin/AdminOrders.jsx";
+import AddProduct from "../admin/AddProduct.jsx";
+import AdminPrivateRoute from "../AdminPrivateRoute.jsx";
 function Home() {
 
 
@@ -31,122 +39,31 @@ function Home() {
   });
 
 
-  // useEffect(() => {
-  //   const fetchCart = async () => {
-  //     try {
-  //       const token = localStorage.getItem("token");
-  //       if (token) {
-  //         const response = await axios.post("http://garland.mohitsasane.tech/api/cart", {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`
-  //           }
-  //         });
-  //         setCart(response.data.cart || []);
-  //         console.log("product addedd");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching cart:", error);
-  //     }
-  //   };
-
-  //   fetchCart();
-  // }, []);
-
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
 
-  // useEffect(() => {
-  //   const fetchCart = async () => {
-  //     const token = localStorage.getItem("token");
-  
-  //     if (!token) return;
-  
-  //     try {
-  //       const response = await axios.get("http://garland.mohitsasane.tech/api/cart", {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`
-  //         }
-  //       });
-  
-  //       setCart(response.data.cart || []);
-  //     } catch (error) {
-  //       console.error("Error fetching cart:", error);
-  //       toast.error("Failed to fetch cart.");
-  //     }
-  //   };
-  
-  //   fetchCart();
-  // }, []);
-  
-
-  
 
 
 
 
-  // function handleAddToCart(e, product) {
-
-
-  //   let quantity = product.quantity || 1;
-  
-
-
-  //   if (cart.length === 0) {
-  //     product.quantity = 1;
-  //     setCart([product]);
-  //     toast.success(`Product added in cart!`);
-  //     return;
-  //   }
-
-  //   const existingIndex = cart.findIndex((item) =>
-  //     item.product_id === product.product_id
-  //   )
-
-  //   if (existingIndex !== -1) {
-  //     const updaatedAArr = [...cart]
-
-  //     updaatedAArr[existingIndex].quantity += 1;
-  //     setCart(updaatedAArr);
-  //     toast.info(`Increased quantity of ${product.name || "product"} in cart`);
-  //   } else {
-  //     product.quantity = 1;
-  //     setCart([...cart, product]);
-  //     // toast.success(`${product.name || "Product"} added to cart!`);
-  //     toast.success(`Product added in cart!`);
-  //   }
 
 
 
 
-  //   // console.log(newCart,"newCart")
-
-
-  //   // e.preventDefault();
-  //   // let quantity = 1;
-  //   console.log("product ", product);
-
-
-
-  //   // setCart([...newCart]);
-  //   // console.log("new caart ", newCart);
-
-  //   // console.log("quantity ", quantity, product.product_id);
-  //   cartPostCall(product.product_id,quantity);
-  // }
 
 
   function handleAddToCart(e, product) {
     let quantity = product.quantity || 1;
-  
+
     const existingIndex = cart.findIndex((item) =>
       item.product_id === product.product_id
     );
-  
+
     let updatedCart;
-  
+
     if (existingIndex !== -1) {
       updatedCart = [...cart];
       updatedCart[existingIndex].quantity += 1;
@@ -156,14 +73,14 @@ function Home() {
       updatedCart = [...cart, product];
       toast.success(`Product added in cart!`);
     }
-  
+
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart)); // 💥 Add this line to persist cart
-  
+    localStorage.setItem("cart", JSON.stringify(updatedCart)); 
+
     // Send to backend
     cartPostCall(product.product_id, quantity);
   }
-  
+
 
 
 
@@ -196,6 +113,29 @@ function Home() {
           </Route>
           <Route path="/cart" element={<Cart />} ></Route>
           <Route path="/checkout" element={<CheckOut />}></Route>
+
+
+
+
+
+
+
+//admin
+          <Route path="/admin-login" element={<AdminLogin />} />
+          {/* <Route path="/admin/dashboard" element={<AdminPrivateRoute><AdminDashboard /></AdminPrivateRoute>} /> */}
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
+          {/* <Route path="/admin/products" element={<AdminPrivateRoute><AdminProducts /></AdminPrivateRoute>} /> */}
+          <Route path="/admin/products" element={<AdminProducts />} />
+
+          {/* <Route path="/admin/add-product" element={<AdminPrivateRoute><AddProduct /></AdminPrivateRoute>} /> */}
+          <Route path="/admin/add-product" element={<AdminDashboard />} />
+
+          {/* <Route path="/admin/orders" element={<AdminPrivateRoute><AdminOrders /></AdminPrivateRoute>} /> */}
+          <Route path="/admin/orders" element={<AdminOrders />} />
+
+
+
         </Routes>
         <ToastContainer
           position="top-right"

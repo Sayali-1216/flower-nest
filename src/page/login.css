@@ -46,3 +46,6 @@
     text-decoration: none;
   }
   
+  .login-container p{
+    margin-top: 10px;
+  }
