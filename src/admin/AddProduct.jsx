@@ -19,7 +19,7 @@ const AddProduct = () => {
     e.preventDefault();
     try {
       // Adjust the API URL and headers as per your backend setup
-      const response = await axios.post('http://garland.mohitsasane.tech/api/products', product, {
+      const response = await axios.post('http://garland.mohitsasane.tech/backend/api/products', product, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

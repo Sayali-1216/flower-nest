@@ -11,7 +11,7 @@ const Order = () => {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://garland.mohitsasane.tech/api/orders", {
+        const response = await axios.get("http://garland.mohitsasane.tech/backend/api/orders", {
           headers: {
             Authorization: `Bearer ${token}`
           }

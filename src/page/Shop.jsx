@@ -92,7 +92,7 @@ const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
-    axios.get("http://garland.mohitsasane.tech/api/products")
+    axios.get("http://garland.mohitsasane.tech/backend/api/products")
       .then((res) => {
         setProducts(res.data);
         console.log("Fetched Products:", res.data);
