@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Subcription.css';
 import { toast } from 'react-toastify'; 
+import axios from 'axios';
 
 const plans = ['Daily', 'Weekly', 'Monthly'];
 
@@ -48,18 +49,69 @@ const Subscription = () => {
   ];
 
 
-  const handleSubscribe = (plan) => {
+  // const handleSubscribe = (plan) => {
+  //   if (selectedProducts.length === 0) {
+  //     toast.warning("Please select products to subscribe.");
+  //     return;
+  //   }
+
+  //   toast.success(`Subscribed to ${plan} plan successfully!`, {
+  //     position: "top-center",
+  //     autoClose: 3000,
+  //   });
+
+  // };
+
+
+  const handleSubscribe = async (plan) => {
     if (selectedProducts.length === 0) {
       toast.warning("Please select products to subscribe.");
       return;
     }
-
-    toast.success(`Subscribed to ${plan} plan successfully!`, {
-      position: "top-center",
-      autoClose: 3000,
-    });
-
+  
+    const token = localStorage.getItem('token');
+  
+    try {
+      for (const product of selectedProducts) {
+        await axios.post(
+          'http://your-api-url.com/backend/api/subscription',
+          {
+            product_id: product.id,
+            plan: plan
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
+      }
+  
+      toast.success(`Subscribed to ${plan} plan successfully!`, {
+        position: "top-center",
+        autoClose: 3000,
+      });
+  
+      // Optional: reset selection after successful subscription
+      setSelectedProducts([]);
+      setShowStep2(false);
+  
+    } catch (error) {
+      console.error('Subscription failed:', error);
+      toast.error("Subscription failed. Please try again.", {
+        position: "top-center",
+        autoClose: 3000,
+      });
+    }
   };
+  
+
+
+
+
+
+
+
 
   const toggleProduct = (product) => {
     const isSelected = selectedProducts.find(p => p.id === product.id);
@@ -70,6 +122,14 @@ const Subscription = () => {
     setSelectedProducts(updated);
     setShowStep2(updated.length > 0);
   };
+
+
+
+
+
+
+
+
 
   return (
     <div className="subscription-wrapper">
@@ -131,94 +191,6 @@ export default Subscription;
 
 
 
-// import React, { useState, useContext } from "react"; 
-// import axios from "axios";
-//  import "./Subcription.css";
-//  import { ecomContext } from '../router/Home';
-
-
-// const Subscription = () => {
-//   const { userToken } = useContext(comContext);
-
-//   const [selectedPlan, setSelectedPlan] = useState(null); const [loading, setLoading] = useState(false); const [responseMsg, setResponseMsg] = useState("");
-
-//   const handlePlanSelect = (plan) => { setSelectedPlan(plan); setResponseMsg(""); };
-
-//   const handleSubscribe = async () => {
-//     if (!selectedPlan) { setResponseMsg("Please select a subscription plan."); return; }
-
-
-//     if (!userToken) {
-//       setResponseMsg("Please login to subscribe.");
-//       return;
-//     }
-
-//     try {
-//       setLoading(true);
-
-//       const res = await axios.post(
-//         "http://garland.mohitsasane.tech/api/subscription",
-//         {
-//           type: selectedPlan,
-//         },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${userToken}`,
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       );
-
-//       setResponseMsg(res.data.message || "Subscription successful!");
-//     } catch (error) {
-//       console.error("Subscription Error:", error);
-//       setResponseMsg("Failed to subscribe. Please try again later.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (<section className="subscription-container"> <h2 className="subscription-title">Choose Your Subscription</h2>
-
-
-//     <div className="subscription-options">
-//       <div
-//         className={`plan-card ${selectedPlan === "daily" ? "selected" : ""}`}
-//         onClick={() => handlePlanSelect("daily")}
-//       >
-//         <h3>Daily</h3>
-//         <p>₹30/day</p>
-//       </div>
-//       <div
-//         className={`plan-card ${selectedPlan === "weekly" ? "selected" : ""}`}
-//         onClick={() => handlePlanSelect("weekly")}
-//       >
-//         <h3>Weekly</h3>
-//         <p>₹180/week</p>
-//       </div>
-//       <div
-//         className={`plan-card ${selectedPlan === "monthly" ? "selected" : ""}`}
-//         onClick={() => handlePlanSelect("monthly")}
-//       >
-//         <h3>Monthly</h3>
-//         <p>₹700/month</p>
-//       </div>
-//     </div>
-
-//     <button
-//       className="subscribe-btn"
-//       onClick={handleSubscribe}
-//       disabled={loading}
-//     >
-//       {loading ? "Subscribing..." : "Confirm Subscription"}
-//     </button>
-
-//     {responseMsg && <p className="subscription-msg">{responseMsg}</p>}
-//   </section>
-//   );
-// };
-
-// export default Subscription;
 
 
 

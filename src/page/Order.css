@@ -46,6 +46,7 @@
   border: 1px solid #ccc;
   padding: 1rem;
   margin-bottom: 2rem;
+  height: 100%;
 }
 .order-item {
   display: flex;

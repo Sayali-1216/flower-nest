@@ -138,8 +138,8 @@ const Order = () => {
     <div className="orders">
       <h2>Your Orders</h2>
       {orders.length === 0 || !products || products.length === 0 ? (
-        <p>No orders found or product data is loading...</p>
-      ) : (
+        <p> Product data is loading...</p>
+       ) : (
         orders.map((order) => (
           <div className="order" key={order.id}>
             <h3>Order ID: {order.id}</h3>
@@ -149,11 +149,13 @@ const Order = () => {
 
             {order.items && order.items.length > 0 ? (
               order.items.map((item, idx) => {
-                const product = products.find(p => p.product_id === item.product_id);
+                const product = products.find(p => p.id === item.product_id);
+
+
 
                 return product ? (
                   <div className="order-item" key={idx}>
-                    <img src={product.image_url} alt={product.name} />
+                    <img src={product.image} alt={product.name} />
                     <div>
                       <h4>{product.name}</h4>
                       <p>Quantity: {item.quantity}</p>

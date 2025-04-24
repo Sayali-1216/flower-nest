@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './updateProduct.css';
+import './UpdateProduct.css';
 
 const UpdateProduct = () => {
   const [productId, setProductId] = useState('');
