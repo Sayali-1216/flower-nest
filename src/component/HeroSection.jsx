@@ -26,7 +26,7 @@ const heroSlides = [
     description: "Perfectly crafted flowers for your special day",
   },
   {
-    image: "https://i.ytimg.com/vi/XnjrtbhENJU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCwm-2vlijR8PRiHfF-j1VRJNpNbw",
+    image: "https://i.etsystatic.com/39616001/r/il/88fe89/6442968069/il_fullxfull.6442968069_pl24.jpg",
     title: "Exquisite Flower Jewelry",
     description: "Delicate floral jewelry, handcrafted for your special moments.",
   },
