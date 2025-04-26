@@ -12,6 +12,10 @@
     margin-bottom: 20px;
     color: #333;
   }
+
+  .login-container h2 span{
+    color: #ffdd57;
+  }
   
   .login-container input {
     width: 100%;

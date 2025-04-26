@@ -74,7 +74,7 @@ function Home() {
     }
 
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart)); 
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
 
     // Send to backend
     cartPostCall(product.product_id, quantity);
@@ -113,10 +113,13 @@ function Home() {
           <Route path="/cart" element={<Cart />} ></Route>
           <Route path="/checkout" element={<CheckOut />}></Route>
 
-          <Route path="/admin" element={<AdminProducts/>}></Route>
-          <Route path="/admin/add-product" element={<AddProduct/>}></Route>
+          <Route path="/admin" element={<AdminProducts />}></Route>
+          {/* <Route path="/admin/add-product" element={<AddProduct/>}></Route>
           <Route path="/admin/delete-product" element={<DeleteProduct/>}></Route>
-          <Route path="/admin/update-product" element={<UpdateProduct/>}></Route>
+          <Route path="/admin/update-product" element={<UpdateProduct/>}></Route> */}
+
+          <Route path="/admin/add" element={<AddProduct />} />
+          <Route path="/admin/update/:id" element={<UpdateProduct />} />
 
 
 

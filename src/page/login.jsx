@@ -51,7 +51,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h2>Login to FlowerNest</h2>
+      <h2>Login to Flower<span>Nest</span></h2>
       <form onSubmit={handleLogin}>
         <input
           type="email"

@@ -1,4 +1,4 @@
-.admin-wrapper {
+/* .admin-wrapper {
     max-width: 1000px;
     margin: 40px auto;
     padding: 30px 20px;
@@ -8,7 +8,7 @@
   
   .admin-heading {
     font-size: 36px;
-    /* color: #8e44ad; */
+    /* color: #8e44ad; *
     margin-bottom: 40px;
     font-weight: bold;
   }
@@ -39,7 +39,7 @@
   .admin-icon {
     font-size: 40px;
     margin-bottom: 15px;
-    color: #e67e22; /* orange like marigold */
+    color: #e67e22; /* orange like marigold *
   }
   
   
@@ -47,5 +47,118 @@
     font-size: 18px;
     color: #444;
     font-weight: 600;
-  }
-  
+  } */
+
+
+
+
+
+
+
+
+
+
+
+
+
+.admin-container {
+  padding: 20px;
+
+}
+
+
+.admin-container h1{
+  font-size: 2.5rem;
+}
+
+.add-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  margin: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease, transform 0.2s ease;
+
+}
+
+
+.add-btn:hover {
+  background-color:darkgreen ;
+
+  transform: scale(1.05);
+}
+
+
+.product-list {
+  display: block;
+  flex-wrap: wrap;
+
+}
+
+.product-card1 {
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  width: 100%;
+  padding: 10px;
+  /* border-radius: 10px; */
+  display: flex;
+  margin-top: 10px;
+}
+
+
+.product-card1 div {
+  display: flex;
+  gap: 8rem;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px;
+}
+
+.product-card1 img {
+  width: 150px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.admin-actions {
+  /* margin-top: 10px; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin-actions button {
+  /* padding: 10px 30px; */
+  width: 6rem;
+  height: 40px;
+}
+
+.update{
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  /* padding: 30px 30px; */
+  margin: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.update:hover {
+  background-color:darkgreen ;
+
+  transform: scale(1.05);
+}
+
+
+.delete {
+  background-color: crimson;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+

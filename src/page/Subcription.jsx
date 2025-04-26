@@ -49,62 +49,37 @@ const Subscription = () => {
   ];
 
 
-  // const handleSubscribe = (plan) => {
-  //   if (selectedProducts.length === 0) {
-  //     toast.warning("Please select products to subscribe.");
-  //     return;
-  //   }
-
-  //   toast.success(`Subscribed to ${plan} plan successfully!`, {
-  //     position: "top-center",
-  //     autoClose: 3000,
-  //   });
-
-  // };
 
 
-  const handleSubscribe = async (plan) => {
-    if (selectedProducts.length === 0) {
-      toast.warning("Please select products to subscribe.");
+  const handleSubscribe = async () => {
+    if (selectedProductIds.length === 0 || !selectedPlan) {
+      setMessage("Please select at least one product and a subscription plan.");
       return;
     }
-  
-    const token = localStorage.getItem('token');
-  
+
     try {
-      for (const product of selectedProducts) {
-        await axios.post(
-          'http://your-api-url.com/backend/api/subscription',
-          {
-            product_id: product.id,
-            plan: plan
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        "http://garland.mohitsasane.tech/backend/api/subscriptions",
+        {
+          product_ids: selectedProductIds,
+          plan: selectedPlan,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          }
-        );
-      }
-  
-      toast.success(`Subscribed to ${plan} plan successfully!`, {
-        position: "top-center",
-        autoClose: 3000,
-      });
-  
-      // Optional: reset selection after successful subscription
-      setSelectedProducts([]);
-      setShowStep2(false);
-  
+        }
+      );
+
+      setMessage("Subscription successful!");
+      setSelectedProductIds([]);
+      setSelectedPlan("");
     } catch (error) {
-      console.error('Subscription failed:', error);
-      toast.error("Subscription failed. Please try again.", {
-        position: "top-center",
-        autoClose: 3000,
-      });
+      console.error("Subscription failed:", error);
+      setMessage("Subscription failed. Please try again.");
     }
   };
-  
 
 
 
@@ -184,16 +159,6 @@ const Subscription = () => {
 };
 
 export default Subscription;
-
-
-
-
-
-
-
-
-
-
 
 
 
