@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Admin.css';
 
+
 const AdminPanel = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const AdminPanel = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('http://garland.mohitsasane.tech/backend/api/products', {
+      const res = await axios.get('http://garland.mohitsasane.tech/backend/api/products/products', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProducts(res.data);
@@ -27,7 +28,7 @@ const AdminPanel = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
     try {
-      await axios.delete(`http://garland.mohitsasane.tech/backend/api/products/${id}`, {
+      await axios.delete(`http://garland.mohitsasane.tech/backend/api/products/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProducts(products.filter(p => p.id !== id));

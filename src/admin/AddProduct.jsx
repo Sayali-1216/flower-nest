@@ -27,7 +27,7 @@ const AddProduct = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.post("http://garland.mohitsasane.tech/backend/api/products", product, {
+      await axios.post("http://garland.mohitsasane.tech/backend/api/products/products", product, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
