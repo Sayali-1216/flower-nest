@@ -50,7 +50,7 @@ const UpdateProduct = () => {
       alert("Product updated successfully!");
       navigate("/admin"); // Redirect to admin panel
     } catch (error) {
-      console.error("Error updating product:", error);
+      // console.error("Error updating product:", error);
       alert("Failed to update product. Check console for details.");
     }
   };
