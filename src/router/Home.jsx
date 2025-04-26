@@ -24,8 +24,8 @@ import { toast } from 'react-toastify';
 import { cartPostCall } from "../util/api.js";
 import AdminProducts from "../admin/Admin.jsx";
 import AddProduct from "../admin/AddProduct.jsx";
-import DeleteProduct from "../admin/DeleteProduct.jsx";
-import UpdateProduct from "../admin/updateProduct.jsx";
+// import DeleteProduct from "../admin/DeleteProduct.jsx";
+import UpdateProduct from "../admin/UpdateProduct.jsx";
 
 
 

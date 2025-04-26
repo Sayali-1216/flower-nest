@@ -3,40 +3,6 @@
 
 
 
-// import React from "react";
-// import { useNavigate } from "react-router-dom";
-// import { FaPlusCircle, FaTrashAlt, FaEdit } from "react-icons/fa";
-// import "./admin.css";
-
-// const AdminPanel = () => {
-//   const navigate = useNavigate();
-
-//   return (
-//     <div className="admin-wrapper">
-//       <h2 className="admin-heading">Admin Dashboard</h2>
-//       <div className="admin-cards">
-//         <div className="admin-card" onClick={() => navigate("/admin/add-product")}>
-//           <FaPlusCircle className="admin-icon" />
-//           <p>Add Product</p>
-//         </div>
-//         <div className="admin-card" onClick={() => navigate("/admin/delete-product")}>
-//           <FaTrashAlt className="admin-icon" />
-//           <p>Delete Product</p>
-//         </div>
-//         <div className="admin-card" onClick={() => navigate("/admin/update-product")}>
-//           <FaEdit className="admin-icon" />
-//           <p>Update Product</p>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AdminPanel;
-
-
-
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
