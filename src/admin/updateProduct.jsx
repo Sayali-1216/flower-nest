@@ -36,8 +36,11 @@ const UpdateProduct = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://garland.mohitsasane.tech/backend/api/products/products/${id}`, product, { headers: { Authorization: `Bearer ${token}` } });
-
+      await axios.put(`http://garland.mohitsasane.tech/backend/api/products/products/${id}`, product, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       alert("Product updated successfully!");
       navigate("/admin");
     } catch (error) {
@@ -75,7 +78,7 @@ const UpdateProduct = () => {
         />
         <input
           type="text"
-          name="image_url"
+          name="image"
           value={product.image_url}
           onChange={handleChange}
           placeholder="Image URL"

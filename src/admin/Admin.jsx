@@ -28,10 +28,13 @@ const AdminPanel = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
     try {
-      await axios.delete(`http://garland.mohitsasane.tech/backend/api/products/products/${id}`, {
+      const response= await axios.delete(`http://garland.mohitsasane.tech/backend/api/products/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      setProducts(products.filter(p => p.id !== id));
+      // setProducts(products.filter(p => p.id !== id));
+      fetchProducts()
+
+      console.log(response.data,"response.data")
     } catch (error) {
       console.error("Error deleting product", error);
     }
@@ -54,8 +57,13 @@ const AdminPanel = () => {
               <p>{product.description}</p>
               <p>₹{product.price}</p>
               <div className="admin-actions">
-                <button onClick={() => navigate(`/admin/update/${product.id}`)} className='update'>✏️ Update</button>
-                <button className="delete" onClick={() => handleDelete(product.id)}>🗑️ Delete</button>
+                <button onClick={() => 
+                navigate(`/admin/update/${product.product_id}`)
+
+                // console.log(product.product_id,"this is product")
+
+                } className='update'>✏️ Update</button>
+                <button className="delete" onClick={() => handleDelete(product.product_id)}>🗑️ Delete</button>
               </div>
             </div>
           </div>

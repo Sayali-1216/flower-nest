@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Header.css";
 import { FaShoppingCart, FaUser, FaBars, FaTimes } from "react-icons/fa";
 import { ecomContext } from "../router/Home.jsx";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isAdmin,setIsAdmin]=useState(false);
   const navigate = useNavigate();
   const { cart, isLoggedIn, setIsLoggedIn } = useContext(ecomContext);
 
@@ -19,9 +20,28 @@ const Header = () => {
     navigate("/login");
   };
 
+  useEffect(()=>{
+    const user=JSON.parse(localStorage.getItem('loggedInUser'))
+
+    console.log(user)
+    if(user?.role==='super_admin'||user?.role==="admin"){
+      console.log("user is admin")
+      setIsAdmin(true)
+    }
+
+  },[])
+  
+    
+
+    
+  
+
   return (
     <header className="header">
       <div className="admin-header">
+        {
+
+        }
         <button onClick={() => window.location.href = "/admin"}>
           Admin
         </button>

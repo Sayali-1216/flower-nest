@@ -15,25 +15,32 @@ const AddProduct = () => {
   const [product, setProduct] = useState({
     name: "",
     description: "",
-    price: "",
-    image: ""
+    price: 0,
+    image_url: "",
+    stock:50,
+    category_id:1,
   });
 
   const handleChange = (e) => {
-    setProduct({ ...product, [e.target.name]: e.target.value });
+    setProduct({ ...product, [e.target.name]: e.target.value});
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.post("http://garland.mohitsasane.tech/backend/api/products/products", product, {
+      const response= await axios.post("http://garland.mohitsasane.tech/backend/api/products/products", 
+        {
+          ...product,price:Number(product.price)
+        }
+        , {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       alert("Product added successfully!");
-      setProduct({ name: "", description: "", price: "", image: "" }); // Reset form
+      console.log(response.data,"postCall data")
+      // setProduct({ name: "", description: "", price: "", image: "" }); // Reset form
     } catch (error) {
       console.error("Error adding product:", error);
       alert("Failed to add product. Check console for details.");
@@ -69,7 +76,7 @@ const AddProduct = () => {
         />
         <input
           type="text"
-          name="image"
+          name="image_url"
           value={product.image}
           onChange={handleChange}
           placeholder="Image URL"
