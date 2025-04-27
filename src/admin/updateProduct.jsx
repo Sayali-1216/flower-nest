@@ -13,7 +13,7 @@ const UpdateProduct = () => {
     name: "",
     description: "",
     price: "",
-    image: ""
+    image_url: ""
   });
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const UpdateProduct = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://garland.mohitsasane.tech/backend/ducts/products/${id}`, product, {
+      await axios.put(`http://garland.mohitsasane.tech/backend/api/products/products/${id}`, product, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -50,7 +50,7 @@ const UpdateProduct = () => {
       alert("Product updated successfully!");
       navigate("/admin"); // Redirect to admin panel
     } catch (error) {
-      // console.error("Error updating product:", error);
+      console.error("Error updating product:", error);
       alert("Failed to update product. Check console for details.");
     }
   };
@@ -85,7 +85,7 @@ const UpdateProduct = () => {
         <input
           type="text"
           name="image"
-          value={product.image}
+          value={product.image_url}
           onChange={handleChange}
           placeholder="Image URL"
           required
