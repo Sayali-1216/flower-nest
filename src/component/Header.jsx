@@ -23,7 +23,7 @@ const Header = () => {
     <header className="header">
       <div className="admin-header">
         <button onClick={() => window.location.href = "/admin"}>
-           Admin
+          Admin
         </button>
       </div>
       <div className="logo">
@@ -72,6 +72,13 @@ const Header = () => {
           <button className="logout-btn" onClick={handleLogout}>Logout</button>
         ) : (
           <a href="/login" className="icon"><FaUser /></a>
+          // <>
+          //   <Route path="/login" element={<LoginOptions />} />
+          //   <Route path="/admin-login" element={<AdminLogin />} />
+          //   <Route path="/user-login" element={<UserLogin />} />
+
+          // </>
+
         )}
 
         <div className="menu-toggle" onClick={toggleMenu}>

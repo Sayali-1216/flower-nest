@@ -140,13 +140,13 @@ const Order = () => {
           total_amount: order.total_amount,
           status: order.status,
         }));
-
         const fetchedSubscriptions = subRes.data?.map(sub => ({
           id: sub.subscription_id,
-          product_ids: sub.product_ids, // assuming it's an array
+          product_ids: [sub.product_id], // ✅ Wrap single product_id inside array
           plan: sub.type,
           start_date: sub.start_date,
         }));
+
 
         setOrders(fetchedOrders || []);
         setSubscriptions(fetchedSubscriptions || []);
@@ -221,6 +221,7 @@ const Order = () => {
                         <p key={idx}>Product not found for ID: {pid}</p>
                       );
                     })}
+
                   </div>
                 </div>
               ))}

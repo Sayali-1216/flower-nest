@@ -122,7 +122,9 @@ function Home() {
 
 
 
-
+          {/* <Route path="/login" element={<LoginOption />} /> */}
+          {/* <Route path="/admin-login" element={<AdminLogin />} />
+          <Route path="/user-login" element={<UserLogin />} /> */}
 
 
 

@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
@@ -13,18 +10,15 @@ const UpdateProduct = () => {
     name: "",
     description: "",
     price: "",
-    image: ""
+    image_url: ""
   });
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`http://garland.mohitsasane.tech/backend/api/products/products/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(`http://garland.mohitsasane.tech/backend/api/products/products/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+
         setProduct(response.data);
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -42,15 +36,12 @@ const UpdateProduct = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://garland.mohitsasane.tech/backend/ducts/products/${id}`, product, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.put(`http://garland.mohitsasane.tech/backend/api/products/products/${id}`, product, { headers: { Authorization: `Bearer ${token}` } });
+
       alert("Product updated successfully!");
-      navigate("/admin"); // Redirect to admin panel
+      navigate("/admin");
     } catch (error) {
-      // console.error("Error updating product:", error);
+      console.error("Error updating product:", error);
       alert("Failed to update product. Check console for details.");
     }
   };
@@ -84,8 +75,8 @@ const UpdateProduct = () => {
         />
         <input
           type="text"
-          name="image"
-          value={product.image}
+          name="image_url"
+          value={product.image_url}
           onChange={handleChange}
           placeholder="Image URL"
           required

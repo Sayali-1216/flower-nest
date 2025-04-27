@@ -49,7 +49,7 @@ const AdminPanel = () => {
         {products.map(product => (
           <div className="product-card1" key={product.id}>
             <img src={product.image_url} alt={product.name} />
-            <div key={product.id}>
+            <div >
               <h3>{product.name}</h3>
               <p>{product.description}</p>
               <p>₹{product.price}</p>
