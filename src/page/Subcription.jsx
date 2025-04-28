@@ -162,18 +162,15 @@
 
 
 
+import React, { useState, useEffect } from 'react';
+import './Subcription.css';
 
-
-
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Subcription.css'; // optional for styles
+const plans = ['Daily', 'Weekly', 'Monthly'];
 
 const Subscription = () => {
-  const navigate = useNavigate();
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [step, setStep] = useState(1);
-  const [selectedPlan, setSelectedPlan] = useState('');
+  const [showStep2, setShowStep2] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null);
 
   const products = [
     {
@@ -184,7 +181,7 @@ const Subscription = () => {
     },
     {
       id: 2,
-      name: 'Fresh  Betal Leaves (paan)',
+      name: 'Fresh Betal Leaves (paan)',
       price: { Daily: 15, Weekly: 90, Monthly: 300 },
       image: 'https://www.shahigrocery.com/image/cache/catalog/product/paan%20leaves-700x700.jpg'
     },
@@ -214,99 +211,110 @@ const Subscription = () => {
     },
   ];
 
+  // Fetch saved products from localStorage when component mounts
+  useEffect(() => {
+    const savedProducts = localStorage.getItem('selectedProducts');
+    if (savedProducts) {
+      setSelectedProducts(JSON.parse(savedProducts));
+    }
 
+    const savedPlan = localStorage.getItem('selectedPlan');
+    if (savedPlan) {
+      setSelectedPlan(savedPlan);
+    }
+  }, []);
 
-  const toggleProduct = (productId) => {
-    setSelectedProducts((prevSelected) =>
-      prevSelected.includes(productId)
-        ? prevSelected.filter(id => id !== productId)
-        : [...prevSelected, productId]
-    );
+  const toggleProduct = (product) => {
+    const isSelected = selectedProducts.find(p => p.id === product.id);
+    const updated = isSelected
+      ? selectedProducts.filter(p => p.id !== product.id)
+      : [...selectedProducts, product];
+    
+    setSelectedProducts(updated);
+
+    // Save the selected products to localStorage
+    localStorage.setItem('selectedProducts', JSON.stringify(updated));
+
+    setShowStep2(updated.length > 0);
   };
 
-  const handlePlanSelect = (plan) => {
+  const handlePlanSelection = (plan) => {
     setSelectedPlan(plan);
-    setStep(3);
+    // Save the selected plan to localStorage
+    localStorage.setItem('selectedPlan', plan);
   };
 
-  const proceedToPlans = () => {
+  const handleSubscribe = () => {
     if (selectedProducts.length === 0) {
-      alert('Please select at least one product!');
+      alert('Please select at least one product to subscribe.');
       return;
     }
-    setStep(2);
-  };
 
-  const proceedToSummary = () => {
-    navigate('/subscription-summary', { state: { selectedProducts, selectedPlan } });
+    if (!selectedPlan) {
+      alert('Please select a subscription plan.');
+      return;
+    }
+
+    // After successful subscription (only in localStorage), clear selected products and plan
+    alert('Subscription successful!');
+    // localStorage.removeItem('selectedProducts');
+    // localStorage.removeItem('selectedPlan');
+    setSelectedProducts([]);
+    setSelectedPlan(null);
+    setShowStep2(false);
   };
 
   return (
-    <div className="subscription-container">
-      {step === 1 && (
-        <>
-          <h2>Select Products for Subscription</h2>
-          <div className="products-list">
-            {products.map((product) => (
-              <div key={product.id} className="product-item">
-                {/* <input
-                  type="checkbox"
-                  id={product.id}
-                  checked={selectedProducts.includes(product.id)}
-                  onChange={() => toggleProduct(product.id)}
-                />
-                <label htmlFor={product.id}>{product.name}</label> */}
+    <div className="subscription-wrapper">
+      <h1 className="main-heading">Fresh Blooms, Delivered Regularly</h1>
+      <p className="quote">"Flowers are the music of the ground." 🌸</p>
 
-                {/* {products.map(product => (
-                  <div
-                    key={product.id}
-                    className={`product-card ${selectedProducts.find(p => p.id === product.id) ? 'selected' : ''}`}
-                    onClick={() => toggleProduct(product)}
-                  >
-                    <img src={product.image} alt={product.name} />
-                    <h3>{product.name}</h3>
-                  </div>
-                ))} */}
+      <div className="discount-banner">🎉 Get 20% OFF on Monthly Plans!</div>
 
+      {/* Step 1 */}
+      <div className="step-section">
+        <h2>Step 1: Choose Your Products</h2>
+        <div className="product-grid">
+          {products.map(product => (
+            <div
+              key={product.id}
+              className={`product-card ${selectedProducts.find(p => p.id === product.id) ? 'selected' : ''}`}
+              onClick={() => toggleProduct(product)}
+            >
+              <img src={product.image} alt={product.name} />
+              <h3>{product.name}</h3>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Step 2 */}
+      {showStep2 && (
+        <div className="step-section fade-in">
+          <h2>Step 2: Choose Your Subscription Plan</h2>
+          <div className="plans-container">
+            {plans.map(plan => (
+              <div
+                key={plan}
+                className={`plan-card ${selectedPlan === plan ? 'selected' : ''}`}
+                onClick={() => handlePlanSelection(plan)}
+              >
+                <h3>{plan} Plan</h3>
+                {selectedProducts.map(product => (
+                  <p key={product.id}>
+                    {product.name}: ₹{product.price[plan]}
+                  </p>
+                ))}
               </div>
             ))}
           </div>
-          <button className="next-button" onClick={proceedToPlans}>Next</button>
-        </>
-      )}
-
-      {step === 2 && (
-        <>
-          <h2>Select a Plan</h2>
-          <div className="plan-buttons">
-            <button onClick={() => handlePlanSelect('Daily')}>Daily</button>
-            <button onClick={() => handlePlanSelect('Weekly')}>Weekly</button>
-            <button onClick={() => handlePlanSelect('Monthly')}>Monthly</button>
-          </div>
-        </>
-      )}
-
-      {step === 3 && (
-        <>
-          <h2>Confirm Selection</h2>
-          <p>Selected Plan: {selectedPlan}</p>
-          <p>Selected Products:</p>
-          <ul>
-            {selectedProducts.map((id) => {
-              const prod = products.find(p => p.id === id);
-              return <li key={id}>{prod?.name}</li>;
-            })}
-          </ul>
-          <button onClick={proceedToSummary}>Proceed to Subscribe</button>
-        </>
+          <button className="subscribe-btn" onClick={handleSubscribe}>
+            Subscribe to {selectedPlan}
+          </button>
+        </div>
       )}
     </div>
   );
 };
 
 export default Subscription;
-
-
-
-
-

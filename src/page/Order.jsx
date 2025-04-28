@@ -106,9 +106,6 @@
 
 
 
-
-
-
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { ecomContext } from "../router/Home";
@@ -117,6 +114,7 @@ import "./Order.css";
 const Order = () => {
   const [orders, setOrders] = useState([]);
   const [subscriptions, setSubscriptions] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { products } = useContext(ecomContext);
 
   useEffect(() => {
@@ -124,113 +122,120 @@ const Order = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const [orderRes, subRes] = await Promise.all([
-          axios.get("http://garland.mohitsasane.tech/backend/api/orders", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          axios.get("http://garland.mohitsasane.tech/backend/api/subscriptions", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-        ]);
+        const orderRes = await axios.get("http://garland.mohitsasane.tech/backend/api/orders", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-        const fetchedOrders = orderRes.data?.map(order => ({
-          id: order.order_id,
-          items: order.items,
-          date: order.placed_at,
-          total_amount: order.total_amount,
-          status: order.status,
-        }));
-        const fetchedSubscriptions = subRes.data?.map(sub => ({
-          id: sub.subscription_id,
-          product_ids: [sub.product_id], // ✅ Wrap single product_id inside array
-          plan: sub.type,
-          start_date: sub.start_date,
-        }));
-
-
-        setOrders(fetchedOrders || []);
-        setSubscriptions(fetchedSubscriptions || []);
+        setOrders(orderRes.data || []);
       } catch (error) {
-        console.error("Failed to fetch orders or subscriptions:", error);
+        console.error("Failed to fetch orders:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
+    const fetchSubscriptions = () => {
+      try {
+        const selectedProducts = JSON.parse(localStorage.getItem("selectedProducts")) || [];
+        const selectedPlan = localStorage.getItem("selectedPlan");
+
+        if (selectedProducts.length > 0 && selectedPlan) {
+          const subscription = {
+            subscription_id: Date.now(), // fake subscription ID
+            type: selectedPlan,
+            start_date: new Date().toISOString(), // today's date
+            product_ids: selectedProducts.map((p) => p.id),
+          };
+
+          setSubscriptions([subscription]);
+        } else {
+          setSubscriptions([]);
+        }
+      } catch (error) {
+        console.error("Failed to fetch subscription from localStorage:", error);
+        setSubscriptions([]);
+      }
+    };
+    
+
     fetchOrders();
+    fetchSubscriptions();
   }, []);
+
+  if (loading) {
+    return <div className="orders"><p>Loading your orders...</p></div>;
+  }
 
   return (
     <div className="orders">
       <h2>Your Orders</h2>
 
       {/* Regular Orders */}
-      {orders.length === 0 && subscriptions.length === 0 ? (
-        <p>Loading orders and subscriptions...</p>
-      ) : (
-        <>
-          {orders.map((order) => (
-            <div className="order" key={`order-${order.id}`}>
-              <h3>Order ID: {order.id}</h3>
-              <p><strong>Date:</strong> {new Date(order.date).toLocaleString()}</p>
-              <p><strong>Status:</strong> {order.status}</p>
-              <p><strong>Total:</strong> ₹{order.total_amount}</p>
+      {orders.length === 0 && <p>No orders found.</p>}
 
-              {order.items?.length > 0 ? (
-                order.items.map((item, idx) => {
-                  const product = products.find(p => p.id === item.product_id);
-                  return product ? (
-                    <div className="order-item" key={idx}>
-                      <img src={product.image} alt={product.name} />
-                      <div>
-                        <h4>{product.name}</h4>
-                        <p>Quantity: {item.quantity}</p>
-                        <p>Price: ₹ {product.price}</p>
-                      </div>
-                    </div>
-                  ) : (
-                    <p key={idx}>Product not found for Product ID: {item.product_id}</p>
-                  );
-                })
-              ) : (
-                <p>No items in this order.</p>
-              )}
-            </div>
-          ))}
+      {orders.map((order) => (
+        <div className="order" key={`order-${order.order_id}`}>
+          <h3>Order ID: {order.order_id}</h3>
+          <p><strong>Date:</strong> {new Date(order.placed_at).toLocaleString()}</p>
+          <p><strong>Status:</strong> {order.status}</p>
+          <p><strong>Total:</strong> ₹{order.total_amount}</p>
 
-          {/* Subscriptions */}
-          {subscriptions.length > 0 && (
-            <div className="subscriptions">
-              <h2>Your Subscriptions</h2>
-              {subscriptions.map((sub) => (
-                <div className="order subscription-order" key={`sub-${sub.id}`}>
-                  <h3>Subscription ID: {sub.id}</h3>
-                  <p><strong>Plan:</strong> {sub.plan}</p>
-                  <p><strong>Start Date:</strong> {new Date(sub.start_date).toLocaleString()}</p>
-                  <p><strong>Included Products:</strong></p>
-                  <div className="subscription-products">
-                    {sub.product_ids?.map((pid, idx) => {
-                      const product = products.find(p => p.id === pid);
-                      return product ? (
-                        <div className="order-item" key={idx}>
-                          <img src={product.image} alt={product.name} />
-                          <div>
-                            <h4>{product.name}</h4>
-                            <p>Price: ₹{product.price}</p>
-                          </div>
-                        </div>
-                      ) : (
-                        <p key={idx}>Product not found for ID: {pid}</p>
-                      );
-                    })}
-
+          {order.items?.length > 0 ? (
+            order.items.map((item, idx) => {
+              const product = products.find(p => p.id === item.product_id);
+              return product ? (
+                <div className="order-item" key={`orderitem-${idx}`}>
+                  <img src={product.image} alt={product.name} />
+                  <div>
+                    <h4>{product.name}</h4>
+                    <p>Quantity: {item.quantity}</p>
+                    <p>Price per unit: ₹{product.price?.Daily || product.price}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              ) : (
+                <p key={`missingproduct-${idx}`}>Product not found (ID: {item.product_id})</p>
+              );
+            })
+          ) : (
+            <p>No items in this order.</p>
           )}
-        </>
-      )}
+        </div>
+      ))}
+
+      {/* Subscriptions */}
+      <h2>Your Subscriptions</h2>
+      {subscriptions.length === 0 && <p>No subscriptions found.</p>}
+
+      {subscriptions.map((sub, idx) => (
+        <div className="order subscription-order" key={`sub-${idx}`}>
+          <h3>Subscription ID: {sub.subscription_id}</h3>
+          <p><strong>Plan:</strong> {sub.type}</p>
+          <p><strong>Start Date:</strong> {new Date(sub.start_date).toLocaleString()}</p>
+          <p><strong>Included Products:</strong></p>
+
+          <div className="subscription-products">
+            <div className="products-list">
+              {sub.product_ids?.map((pid, pidx) => {
+                const product = products.find(p => p.id === pid);
+                return product ? (
+                  <div className="order-item" key={`subproduct-${pidx}`}>
+                    <img src={product.image} alt={product.name} />
+                    <div>
+                      <h4>{product.name}</h4>
+                      <p>Price ({sub.type}): ₹{product.price?.[sub.type] || product.price}</p>
+                    </div>
+                  </div>
+                ) : (
+                  <p key={`missing-subproduct-${pidx}`}>Product not found (ID: {pid})</p>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
 
 export default Order;
+

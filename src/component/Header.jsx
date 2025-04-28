@@ -38,14 +38,13 @@ const Header = () => {
 
   return (
     <header className="header">
-      <div className="admin-header">
-        {
+    
+        {isAdmin?<div className="admin-header"><button onClick={() => window.location.href = "/admin"}>
+          Admin
+        </button></div>:""
 
         }
-        <button onClick={() => window.location.href = "/admin"}>
-          Admin
-        </button>
-      </div>
+      
       <div className="logo">
         <h1>
           FLOWER<span>Nest</span>
