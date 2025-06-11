@@ -53,7 +53,7 @@ const Register = () => {
     //   });
     // }
 
-     axios.post('http://garland.mohitsasane.tech/backend/api/users/register',formData).then(response=>{
+     axios.post('https://garland.mohitsasane.tech/backend/api/users/register',formData).then(response=>{
       console.log("post created :",response.data);
       // alert("Sign up successful..");
       toast.success("Signup successful!", { autoClose: 2000 });

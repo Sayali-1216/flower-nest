@@ -28,7 +28,7 @@ const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
-    axios.get("http://garland.mohitsasane.tech/backend/api/products/products")
+    axios.get("https://garland.mohitsasane.tech/backend/api/products/products")
       .then((res) => {
         setProducts(res.data);
         console.log("Fetched Products:", res.data);

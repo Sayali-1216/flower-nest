@@ -55,7 +55,7 @@ const Header = () => {
         <ul>
           <li><a href="/" onClick={toggleMenu}>Home</a></li>
           <li><a href="/shop" onClick={toggleMenu}>Shop</a></li>
-          <li><a href="/subscriptions" onClick={toggleMenu}>Subscriptions</a></li>
+          {/* <li><a href="/subscriptions" onClick={toggleMenu}>Subscriptions</a></li> */}
           <li><a href="/order" onClick={toggleMenu}>My Orders</a></li>
           <li><a href="/custom" onClick={toggleMenu}>Customize Order</a></li>
           <li><a href="/about" onClick={toggleMenu}>About Us</a></li>

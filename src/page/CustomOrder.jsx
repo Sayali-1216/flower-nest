@@ -18,7 +18,7 @@ const CustomOrder = () => {
     e.preventDefault();
 
     axios
-      .post("http://garland.mohitsasane.tech/backend/api/custom-orders", formData)
+      .post("https://garland.mohitsasane.tech/backend/api/custom-orders", formData)
       .then((response) => {
         console.log("Custom order success:", response.data);
         alert("Order confirmed!");

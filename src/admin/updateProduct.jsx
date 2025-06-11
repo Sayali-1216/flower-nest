@@ -17,7 +17,7 @@ const UpdateProduct = () => {
     const fetchProduct = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`http://garland.mohitsasane.tech/backend/api/products/products/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+        const response = await axios.get(`https://garland.mohitsasane.tech/backend/api/products/products/${id}`, { headers: { Authorization: `Bearer ${token}` } });
 
         setProduct(response.data);
       } catch (error) {
@@ -36,7 +36,7 @@ const UpdateProduct = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://garland.mohitsasane.tech/backend/api/products/products/${id}`, product, {
+      await axios.put(`https://garland.mohitsasane.tech/backend/api/products/products/${id}`, product, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

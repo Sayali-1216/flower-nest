@@ -29,7 +29,7 @@ const AddProduct = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      const response= await axios.post("http://garland.mohitsasane.tech/backend/api/products/products", 
+      const response= await axios.post("https://garland.mohitsasane.tech/backend/api/products/products", 
         {
           ...product,price:Number(product.price)
         }

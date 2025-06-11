@@ -9,7 +9,7 @@ import Shopoutlet from "../page/Shopoutlet.jsx";
 import Cart from "../page/Cart.jsx";
 import SingleProduct from "../page/SingleProduct.jsx";
 import { createContext, useEffect, useState } from "react";
-import { products } from "../data/constant.js";
+// import { products } from "../data/constant.js";
 import Subscription from "../page/Subcription.jsx";
 import Signup from "../page/signup.jsx";
 import Login from "../page/login.jsx";
@@ -43,7 +43,35 @@ function Home() {
   }, [cart]);
 
 
+const [products, setProducts] = useState([]);
+useEffect(() => {
+  const fetchProducts = async () => {
+    try {
+      const res = await axios.get('https://garland.mohitsasane.tech/backend/api/products/products');
+      setProducts(res.data); // Adjust if your data is nested like res.data.products
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
 
+  fetchProducts();
+}, []);
+
+
+
+
+  const calculateSubTotal = () => {
+    return cart.reduce((acc, item) => {
+      const price = item.price;
+      const quantity = item.quantity || 1;
+      return acc + (price * quantity);
+    }, 0);
+  };
+
+  const subTotal = calculateSubTotal();
+  const shipping = cart.length > 0 ? 50 : 0;
+  const tax = Math.round(subTotal * 0.1);
+  const total = subTotal + shipping + tax;
 
 
 
@@ -94,7 +122,7 @@ function Home() {
 
   return (
     <BrowserRouter>
-      <ecomContext.Provider value={{ products, handleAddToCart, cart, setCart, isLoggedIn, setIsLoggedIn }}>
+      <ecomContext.Provider value={{ products, handleAddToCart, cart, setCart, isLoggedIn, setIsLoggedIn ,subTotal,shipping,tax,total}}>
         <Header />
         <Routes>
           <Route path="/" element={<Main />} ></Route>

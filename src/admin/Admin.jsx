@@ -16,7 +16,7 @@ const AdminPanel = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get('http://garland.mohitsasane.tech/backend/api/products/products', {
+      const res = await axios.get('https://garland.mohitsasane.tech/backend/api/products/products', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProducts(res.data);
@@ -28,7 +28,7 @@ const AdminPanel = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
     try {
-      const response= await axios.delete(`http://garland.mohitsasane.tech/backend/api/products/products/${id}`, {
+      const response= await axios.delete(`https://garland.mohitsasane.tech/backend/api/products/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       // setProducts(products.filter(p => p.id !== id));

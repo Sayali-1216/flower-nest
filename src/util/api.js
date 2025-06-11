@@ -11,7 +11,7 @@ export const cartPostCall = async (product_id, quantity = 1) => {
 
   try {
     const response = await axios.post(
-      "http://garland.mohitsasane.tech/backend/api/cart",
+      "https://garland.mohitsasane.tech/backend/api/cart",
       { product_id, quantity },
       {
         headers: {
@@ -45,12 +45,12 @@ export const orderPostCall = async (items) => {
 
   try {
     const response = await axios.post(
-      "http://garland.mohitsasane.tech/backend/api/orders",
+      "https://garland.mohitsasane.tech/backend/api/orders",
       { items },
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
+          // "Content-Type": "application/json"
         }
       }
     );

@@ -34,7 +34,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://garland.mohitsasane.tech/backend/api/users/login', formData); 
+      const response = await axios.post('https://garland.mohitsasane.tech/backend/api/users/login', formData); 
       const { token, user } = response.data;
 
       localStorage.setItem('token', token);

@@ -87,7 +87,7 @@ const SingleProduct = () => {
 
   useEffect(() => {
     if (id) {
-      axios.get(`http://garland.mohitsasane.tech/backend/api/products/products/${id}`)
+      axios.get(`https://garland.mohitsasane.tech/backend/api/products/products/${id}`)
         .then((res) => {
           setProduct(res.data);
         })
