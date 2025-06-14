@@ -1,25 +1,26 @@
 
-
-
-
-
-
-
-
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./addProduct.css"; 
+import Dropdown from "../component/Dropdown";
+import { category_options } from "../data/constant";
+import InputField from "../component/InputField";
+import TextAreaField from "../component/TextAreafield";
 
 const AddProduct = () => {
+  const [categoryId,setCategoryId]=useState(0);
+  console.log(categoryId,'categoryid');
+  console.log("name= ",category_options.value);
   const [product, setProduct] = useState({
     name: "",
     description: "",
-    price: 0,
+    price: '',
     image_url: "",
     stock:50,
-    category_id:1,
+    category_id:0,
   });
+
+
 
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value});
@@ -31,7 +32,7 @@ const AddProduct = () => {
       const token = localStorage.getItem("token");
       const response= await axios.post("https://garland.mohitsasane.tech/backend/api/products/products", 
         {
-          ...product,price:Number(product.price)
+          ...product,price:Number(product.price),category_id:Number(categoryId)
         }
         , {
         headers: {
@@ -51,37 +52,40 @@ const AddProduct = () => {
     <div className="add-product-container">
       <h2>Add New Product</h2>
       <form className="add-product-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          value={product.name}
-          onChange={handleChange}
-          placeholder="Product Name"
-          required
+      
+        <InputField 
+        //  label="Name"
+         name="name"
+         value={product.value}
+         onChange={handleChange}
+         placeholder="Enter Product Name"
+
         />
-        <textarea
-          name="description"
-          value={product.description}
-          onChange={handleChange}
-          placeholder="Product Description"
-          required
+        <TextAreaField
+         name="description"
+         value={product.description}
+         onChange={handleChange}
+         placeholder="Product Description"
+
         />
-        <input
-          type="number"
-          name="price"
-          value={product.price}
-          onChange={handleChange}
-          placeholder="Price"
-          required
+         <InputField 
+        //  label="Name"
+         name="price"
+         value={product.value}
+         onChange={handleChange}
+         placeholder="Enter Price"
+
         />
-        <input
-          type="text"
-          name="image_url"
-          value={product.image}
-          onChange={handleChange}
-          placeholder="Image URL"
-          required
+         <InputField 
+        //  label="Name"
+         name="image_url"
+         value={product.value}
+         onChange={handleChange}
+         placeholder="Enter image url"
+
         />
+      
+        <Dropdown options={category_options} onChange={setCategoryId} />
         <button type="submit">Add Product</button>
       </form>
     </div>
